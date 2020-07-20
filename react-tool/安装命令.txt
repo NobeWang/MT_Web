@@ -1,0 +1,41 @@
+
+1.创建一个 react 项目
+# 安装 create-react-app 命令,如果已将安装请忽略
+
+	npm install -g create-react-app
+
+# 创建 electron-react 项目
+
+	create-react-app electron-react
+
+# 进入项目
+
+	cd electron-react
+
+# 启动 
+
+	npm start
+
+
+2.添加electron包
+npm install -save electron
+
+3.安装react-router
+npm install -S react-router
+npm i -S react-router-dom
+或者npm install react-router-dom --save-dev //这里可以使用cnpm代替npm命令
+或者npm install --save react-router
+
+
+运行：
+npm start
+electron .
+
+
+
+react-router与react-router-dom的区别
+react-router: 实现了路由的核心功能
+react-router-dom: 基于react-router，加入了在浏览器运行环境下的一些功能，例如： Link组件，会渲染一个a标签，Link组件源码a标签行; BrowserRouter和HashRouter组件，前者使用pushState和popState事件构建路由，后者使用window.location.hash和hashchange事件构建路由
+react-router-dom依赖react-router，所以我们使用npm安装依赖的时候，只需要安装相应环境下的库即可，不用再显式安装react-router。基于浏览器环境的开发，只需要安装react-router-dom
+
+react-router-native: 基于react-router，类似react-router-dom，加入了react-native运行环境下的一些功能。
