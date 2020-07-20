@@ -4,7 +4,7 @@ import {a, dogSay, catSay, babySay} from '../js/ExportJs'; //导出了 export �
 import m from '../js/ExportJs';  //导出了 export default 
 
  
-var mathUtil = require('../js/ExportMoudle');
+let mathUtil = require('../js/ExportMoudle');
 
 
 // import * as mathUtil from "../js/ExportMoudle2"

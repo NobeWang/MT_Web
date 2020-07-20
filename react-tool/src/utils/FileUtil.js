@@ -1,10 +1,10 @@
-const fs = require("fs");
-const path = require("path");
+const fs = window.fs;
+const path = window.path;
 /**
- * Created by RockeyCai on 16/2/22.
  * 创建文件夹帮助类
  */
 
+let files;
 //递归创建目录 异步方法
 function mkdirs(dirname, callback) {
     fs.exists(dirname, function (exists) {
@@ -54,6 +54,7 @@ module.exports.getFileList = getFileList;
 module.exports.getExtName = getExtName;
 module.exports.getTypeExtName = getTypeExtName;
 module.exports.deleteFolder = deleteFolder;
+module.exports.readTextFile = readTextFile;
 //调用
 //mkdirsSync("./aa/bb/cc" , null);
 //mkdirs("./aa/bb/cc", function (ee) {
@@ -118,10 +119,10 @@ function getTypeExtName(fileName) {
 }
 
 function deleteFolder(path) {
-    var files = [];
+    var delfiles = [];
     if (fs.existsSync(path)) {
-        files = fs.readdirSync(path);
-        files.forEach(function (file, index) {
+        delfiles = fs.readdirSync(path);
+        delfiles.forEach(function (file, index) {
             var curPath = path + "/" + file;
             if (fs.statSync(curPath).isDirectory()) { // recurse             
                 deleteFolder(curPath);
@@ -133,3 +134,25 @@ function deleteFolder(path) {
         fs.rmdirSync(path);
     }
 };
+/**
+ * 读取文件数据
+ * @param {} path 
+ */
+function readTextFile(path, res){
+    // 读取文件内容
+    if(!path){
+        console.error("file path error");
+        res(null);
+        return;
+    }
+    fs.readFile(path, 'utf-8', (err, data) => {
+        if (err) {
+            console.log(err);
+            res(null);
+            return;
+        } else {
+            res(data);
+            return;
+        }
+    })
+}

@@ -7,6 +7,8 @@ import JSCallPage from './pages/JsPage'
 import JSCallPage2 from './pages/JsPage2'
 import WordFilter from './pages/WordFilter'
 import AppIpc from './pages/AppIpc'
+import FsFile from './pages/FsFile'
+import AppRemote from './pages/AppRemote'
 
 import {
   HashRouter  as Router,
@@ -26,6 +28,8 @@ function LinkPage(){
                 <li><Link to='/jspage2'>JS调用页面2</Link></li>
                 <li><Link to='/wordfilter'>屏蔽字库</Link></li>
                 <li><Link to='/appipc'>进程交互</Link></li>
+                <li><Link to='/fsfile'>访问本地文件</Link></li>
+                <li><Link to='/appremote'>进程调用</Link></li>
               </ul>
           </div>)
 }
@@ -43,6 +47,8 @@ function App() {
         <Route path='/jspage2' component={JSCallPage2} ></Route>
         <Route path='/wordfilter' component={WordFilter} ></Route>
         <Route path='/appipc' component={AppIpc} ></Route>
+        <Route path='/fsfile' component={FsFile} ></Route>
+        <Route path='/appremote' component={AppRemote} ></Route>
       </Router>
     </div>
   );

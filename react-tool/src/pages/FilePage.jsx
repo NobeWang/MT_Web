@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 /**
  * 本地文件操作
+ * 这里调用的是react里面的FileReader
  */
 class FilePage extends React.Component {
     selectFile() {
@@ -26,7 +27,6 @@ class FilePage extends React.Component {
             }
             reader.readAsDataURL(file);
         }
-
     }
 
     render() {
@@ -34,7 +34,6 @@ class FilePage extends React.Component {
             <div>
                 <p>this is file selected</p>
                 <div>选择一个本地文件</div>
-                {/* <button onClick={ this.selectFile }>选择</button> */}
                 <input type="file" id="file" onChange={this.jsReadFiles.bind(this)} />
             </div>
         )

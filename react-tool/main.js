@@ -1,17 +1,22 @@
-  const {
-    app,
-    BrowserWindow
-  } = require('electron')
+  const {app, BrowserWindow} = require('electron')
+  const path = require("path");
+  const ipc = require('electron').ipcMain;
 
   // 保持对window对象的全局引用，如果不这么做的话，当JavaScript对象被
   // 垃圾回收的时候，window对象将会自动的关闭
   let win;
 
+  console.log("__dirname=========================》》》：" + __dirname);
+  console.log("__filename=========================》》》：" + __filename);
+
   function createWindow() {
     const windowOptions = {
-      width: 1000,
-      height: 600,
-      frame: false,
+      width: 1200,
+      height: 800,
+      frame: true,
+      webPreferences: {
+        preload: path.join(__dirname, './src/render/render.js')
+      }
     };
     // 创建浏览器窗口。
     win = new BrowserWindow(windowOptions);
@@ -26,8 +31,6 @@
     //   protocol: 'file:',
     //   slashes: true
     // }))
-    console.log("__dirname=========================》》》：" + __dirname);
-    console.log("__filename=========================》》》：" + __filename);
 
     // 加载应用----适用于 react 开发时项目
     win.loadURL("http://localhost:3000")
@@ -45,9 +48,8 @@
     })
 
     //接收渲染进程的信息
-    const ipc = require('electron').ipcMain;
-    ipc.on('min', function () {
-      console.log("===============================》》》：接收到min消息");
+    ipc.on('min', function (params) {
+      console.log("===============================》》》：接收到渲染进程发来的消息   "+params);
       win.minimize();
     });
 
