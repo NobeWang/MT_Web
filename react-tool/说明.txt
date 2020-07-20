@@ -1,3 +1,6 @@
+electron中的main主进程可以通过nodejs操作本地系统文件，但是主进程中没有window对象
+react渲染页面中不能访问electron中的接口，例如const { ipcRenderer } = require("electron")等，但是页面渲染进程里面有window对象的，可以实现页面之间的数据传递，但是没有办法通过window和electron主进程进行数据交互与通信
+
 react-router与react-router-dom的区别
 react-router: 实现了路由的核心功能
 react-router-dom: 基于react-router，加入了在浏览器运行环境下的一些功能，例如： Link组件，会渲染一个a标签，Link组件源码a标签行; BrowserRouter和HashRouter组件，前者使用pushState和popState事件构建路由，后者使用window.location.hash和hashchange事件构建路由
