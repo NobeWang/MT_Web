@@ -2,6 +2,8 @@
   const path = require("path");
   const ipc = require('electron').ipcMain;
 
+  module.exports.rootPath = __dirname;
+
   // 保持对window对象的全局引用，如果不这么做的话，当JavaScript对象被
   // 垃圾回收的时候，window对象将会自动的关闭
   let win;
@@ -11,7 +13,7 @@
 
   function createWindow() {
     const windowOptions = {
-      width: 1200,
+      width: 1300,
       height: 800,
       frame: true,
       webPreferences: {
@@ -104,3 +106,17 @@
 
   // 在这个文件中，你可以续写应用剩下主进程代码。
   // 也可以拆分成几个文件，然后用 require 导入。
+
+
+  //这个是主进程中对渲染进程开放的接口， 可以通过remote模块来直接在渲染进程中调用次函数
+  module.exports.max = max;
+  module.exports.add = add;
+  function max(num1, num2){
+    console.log("max  "+num1, num2);
+    let m = num1 > num2 ? num1 : num2;
+    return m;
+  }
+  function add(num3, num4){
+    console.log("add  "+num3, num4);
+    return num3 + num4;
+  }

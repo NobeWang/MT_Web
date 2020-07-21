@@ -37,7 +37,7 @@ HTML模板修改
 在public目录中有个index.html是单页面应用的基本模板，所有react生成的代码都会注入到此HTML中。所以此处可以添加一些cdn脚本或者全局的html。
 
 main.js就是主进程，在主进程中打开的一个web页面就是一个渲染进程，这个web页面也就是该项目中的这个index.html，并且可以直接web页面上通过nodejs的api进行系统级的交互。
-如果我们没有使用react，那么没有什么问题，但是在react引入electron就会报错了。所以，要在react中使用，就需要提前将electron赋值给window.electron 以方便使用。在index.html的head中增加了一句js，如下图
+如果我们没有使用react，那么没有什么问题，但是在react引入electron就会报错了。所以，要在react中使用，就需要提前将electron赋值给window.electron 以方便使用。在index.html的head中增加了一句js，如下
 
-作者：
+：
 <script>global.electron = require('electron')</script>

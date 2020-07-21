@@ -8,9 +8,28 @@ const electron = window.electron;
  * 为了能从渲染进程中使用它们，需要用ipc模块来给主进程发送进程间消息
  * 使用 remote 模块，可以调用主进程对象的方法，而无需显式地发送进程间消息
  */
+
+const foo = electron.remote.require('./src/main/fileUtilPM');
+const main= electron.remote.require('./main');
 class AppRemote extends React.Component{
-    minWindow=()=>{
-        // const foo = require('electron').remote.require('./foo') // bar
+    onSelectFile=()=>{
+        let add = main.add;
+        let max = main.max;
+        let m = max(10, 20);
+        console.log("max in main  "+m);
+        let p = add(10, 20);
+        console.log("add in main  "+p);
+
+        let selectFile = foo.selectFile;
+        selectFile();
+    }
+
+    onReadFile=()=>{
+        let rootPath = main.rootPath;
+        console.log("rootPath     "+rootPath);
+
+        let readMeFile = foo.readMeFile;
+        readMeFile(rootPath+"\\README.md");
     }
 
 
@@ -18,9 +37,8 @@ class AppRemote extends React.Component{
         return(
             <div className="login">
                 <div className="main">
-                    <div className="main-content">
-                    <button onClick={ this.minWindow }>缩小界面</button>
-                    </div>
+                   <p><button onClick={ this.onSelectFile }>主进程选择文件</button></p>
+                   <p><button onClick={ this.onReadFile }>主进程读取文件</button></p>
                 </div>
             </div>
         )
