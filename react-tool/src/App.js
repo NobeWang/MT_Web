@@ -9,6 +9,7 @@ import WordFilter from './pages/WordFilter'
 import AppIpc from './pages/AppIpc'
 import FsFile from './pages/FsFile'
 import AppRemote from './pages/AppRemote'
+import MenuPage from './pages/MenuPage'
 
 import {
   HashRouter  as Router,
@@ -30,6 +31,7 @@ function LinkPage(){
                 <li><Link to='/appipc'>进程交互</Link></li>
                 <li><Link to='/fsfile'>访问本地文件</Link></li>
                 <li><Link to='/appremote'>进程调用</Link></li>
+                <li><Link to='/menupage'>Menu菜单</Link></li>
               </ul>
           </div>)
 }
@@ -49,6 +51,7 @@ function App() {
         <Route path='/appipc' component={AppIpc} ></Route>
         <Route path='/fsfile' component={FsFile} ></Route>
         <Route path='/appremote' component={AppRemote} ></Route>
+        <Route path='/menupage' component={MenuPage} ></Route>
       </Router>
     </div>
   );
