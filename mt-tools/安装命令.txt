@@ -1,0 +1,38 @@
+
+1.创建一个 react 项目
+# 安装 create-react-app 命令,如果已将安装请忽略
+
+	npm install -g create-react-app
+
+# 创建 electron-react 项目
+
+	create-react-app electron-react
+
+# 进入项目
+
+	cd electron-react
+
+# 启动 
+
+	npm start
+
+
+2.添加electron包
+npm install -save electron
+
+3.安装react-router
+npm install -S react-router
+npm i -S react-router-dom
+或者npm install react-router-dom --save-dev //这里可以使用cnpm代替npm命令
+或者npm install --save react-router
+
+4.安装gulp模块
+cnpm install -g gulp gulp-concat gulp-uglify node-zip del images
+
+5.安装minimist模块
+npm i minimist -g
+
+
+运行：
+npm start
+electron .

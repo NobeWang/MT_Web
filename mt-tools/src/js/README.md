@@ -1,0 +1,13 @@
+﻿var gulp = require(‘gulp‘), //获取gulp
+    htmlmin = require("gulp-htmlmin"), //压缩页面javascript、css，去除页面空格、注释，删除多余属性等操作
+    imagemin = require("gulp-imagemin"), //压缩图片文件
+    cache = require(‘gulp-cache‘), //只压缩修改的图片
+    pngquant = require(‘imagemin-pngquant‘), //深度压缩图片
+    less = require("gulp-less"), //将less文件编译成css
+    sourcemaps = require(‘gulp-sourcemaps‘), //生成sourcemap文件
+    cssmin = require("gulp-clean-css"), //压缩css文件
+    uglify = require("gulp-uglify"), //压缩javascript文件
+    concat = require("gulp-concat"), //合并javascript文件，减少网络请求
+    rev = require("gulp-rev-append"), //引用添加版本号，清除页面引用缓存
+    autoprefixer = require("gulp-autoprefixer"), //自动处理浏览器前缀
+    livereload = require("gulp-livereload"); //监听文件发生变化时，浏览器自动刷新页面
