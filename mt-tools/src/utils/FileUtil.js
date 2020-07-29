@@ -32,6 +32,43 @@ function mkdirsSync(dirname) {
     }
 }
 
+/**
+ * 读取文件数据
+ * 调用 fs.readFile() 方法来读取文件
+ * fs.readFile('读取文件的路径','文件编码格式','回调函数')
+ * 在读取文件的时候，如果传递了编码格式，那么回调函数中的 data默认就会转换为 字符串，否则data 参数的数据是一个 Buffer 对象，里面保存的就是一个一个的字节(理解为字节数组)
+ * 把 Buffer 对象转换为字符串，调用 toString() 方法
+ */
+function readTextFile(path, res) {
+    // 读取文件内容
+    fs.readFile(path, 'utf-8', (err, data) => {
+        if (err) {
+            console.log(err);
+            res(null);
+            return;
+        } else {
+            res(data);
+            return;
+        }
+    })
+}
+
+//写入文件
+//调用 fs.writeFile() 进行文件写入 
+// fs.writeFile() 是异步方法
+// fs.writeFile('写入文件的路径','要写入的数据','文档编码格式','回调函数')
+function writeFile(path, data) {
+    fs.writeFile(path, data, 'utf8', (err) => {
+        //如果 err===null,表示文件写入
+        //只要 err 里面不是null，就表示写入文件失败了！
+        if (err) {
+            console.log('写入文件出错拉！具体错误：' + err)
+        } else {
+            console.log('ok');
+        }
+    });
+}
+
 module.exports.modifyFilename = function modifyFilename(pth, modifier) {
     if (arguments.length !== 2) {
         throw new Error('`path` and `modifier` required');
@@ -55,6 +92,8 @@ module.exports.getExtName = getExtName;
 module.exports.getTypeExtName = getTypeExtName;
 module.exports.deleteFolder = deleteFolder;
 module.exports.readTextFile = readTextFile;
+module.exports.writeFile = writeFile;
+
 //调用
 //mkdirsSync("./aa/bb/cc" , null);
 //mkdirs("./aa/bb/cc", function (ee) {
@@ -134,25 +173,3 @@ function deleteFolder(path) {
         fs.rmdirSync(path);
     }
 };
-/**
- * 读取文件数据
- * @param {} path 
- */
-function readTextFile(path, res){
-    // 读取文件内容
-    if(!path){
-        console.error("file path error");
-        res(null);
-        return;
-    }
-    fs.readFile(path, 'utf-8', (err, data) => {
-        if (err) {
-            console.log(err);
-            res(null);
-            return;
-        } else {
-            res(data);
-            return;
-        }
-    })
-}

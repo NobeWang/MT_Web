@@ -2,7 +2,24 @@
   const path = require("path");
   const ipc = require('electron').ipcMain;
 
-  module.exports.rootPath = __dirname;
+  // var gp = require('gulp');
+
+  var UglifyJS = require("uglify-js");
+  // var code = "function add(first, second) { return first + second; }";
+  // var result = UglifyJS.minify(code);
+  // console.log(result.error); // runtime error, or `undefined` if no error
+  // console.log(result.code);  // minified output: function add(n,d){return n+d}
+
+  function uglifyJsFile(str){
+    var result = UglifyJS.minify(str);
+    if(result.error){
+      return result.error;
+    } else {
+      return result.code;
+    }
+  }
+  module.exports.uglifyJsFile = uglifyJsFile;
+ 
 
   // 保持对window对象的全局引用，如果不这么做的话，当JavaScript对象被
   // 垃圾回收的时候，window对象将会自动的关闭

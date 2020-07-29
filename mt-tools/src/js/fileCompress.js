@@ -1,11 +1,7 @@
-// var gp = require('gulp');
+// var gp = require('gulp');//gulp模块工具不能在electron代码里面调用
 
-// var concat = require('gulp-concat');
-// var uglify = require('gulp-uglify');
 var fs = require("fs");
-// var del = require('del');
 // var minimist = require('minimist');
-
 
 let jsReleasePath;//
 let assetsPath;//
@@ -20,12 +16,14 @@ function configFilePaths(p1, p2, p3, p4, p5){
     webFileName = p4;
     versionFileName = p5;
     console.log(p1, p2, p3, p4, p5);
+
+    // var code = "function add(first, second) { return first + second; }";
+    // var result = UglifyJS.minify(code);
+    // console.log(result.error); // runtime error, or `undefined` if no error
+    // console.log(result.code);  // minified output: function add(n,d){return n+d}
 }
 
 function mergeJs(){
-    // console.log("=============="+ concat, uglify, fs, del, minimist);
-    // var gp = require('gulp');
-    var uglify = require('gulp-uglify');
 }
 
 module.exports.configFilePaths = configFilePaths;
