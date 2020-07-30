@@ -40,23 +40,30 @@ function mkdirsSync(dirname) {
  * 把 Buffer 对象转换为字符串，调用 toString() 方法
  */
 function readTextFile(path, res) {
-    // 读取文件内容
     fs.readFile(path, 'utf-8', (err, data) => {
         if (err) {
             console.log(err);
             res(null);
-            return;
         } else {
             res(data);
-            return;
         }
     })
 }
 
-//写入文件
-//调用 fs.writeFile() 进行文件写入 
-// fs.writeFile() 是异步方法
-// fs.writeFile('写入文件的路径','要写入的数据','文档编码格式','回调函数')
+/**
+ * 调用 fs.writeFile() 进行文件写入
+ * fs.writeFile() 是异步方法
+ * fs.writeFile('写入文件的路径','要写入的数据','文档编码格式','回调函数')
+ * 1. fs.writeFile('文件路径'，'要写入的内容'，['编码']，'回调函数');
+ * 2. 写入的时候如果没有这个文件，会自动创建这个文件
+ * 3. 如果被写入的文件已存在内容，那么写入的话，会覆盖之前的内容
+ * 4. 写入数据的类型必须是字符串或buffer二进制数据，对象等数据写入后，接收的是数据类型
+ * 5. 编码部分一般省略即可，或填写'utf-8'
+ * 6. 回调函数中，只有err一个参数，写入错误即可判断调用
+ * 7. fs.writeFileSync()同步版本
+ * @param {*} path 要写入的文件路径
+ * @param {*} data 要写入的数据，默认写入数据使用utf-8编码
+ */
 function writeFile(path, data) {
     fs.writeFile(path, data, 'utf8', (err) => {
         //如果 err===null,表示文件写入

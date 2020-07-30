@@ -12,9 +12,6 @@ let webFileName="web";//
 let versionFileName="ver";//
 let needAddPackage;//
 
-let outCompressPath;
-let compressFilePath;
-
 let readData;
 
 class JSCompress extends React.Component {
@@ -26,8 +23,6 @@ class JSCompress extends React.Component {
                     p3:"",
                     p4:webFileName,
                     p5:versionFileName,
-                    p6:outCompressPath,
-                    p7:compressFilePath
                 };
 
         this.handleChange1 = this.handleChange1.bind(this);
@@ -35,8 +30,6 @@ class JSCompress extends React.Component {
         this.handleChange3 = this.handleChange3.bind(this);
         this.handleChange4 = this.handleChange4.bind(this);
         this.handleChange5 = this.handleChange5.bind(this);
-        this.handleChange6 = this.handleChange6.bind(this);
-        this.handleChange7 = this.handleChange7.bind(this);
         this.onpublic = this.onpublic.bind(this);
       }
     selectReleaseFiles = () => {
@@ -83,21 +76,6 @@ class JSCompress extends React.Component {
         })
     }
 
-    electCompressOutFiles = () => {
-        let t = this;
-        dialog.showOpenDialog({
-            properties: ['openDirectory']
-        }).then(result => {
-            let paths = result.filePaths;
-            if (paths && paths.length > 0) {
-                outCompressPath = paths[0];
-                t.setState({p6:outCompressPath});
-            }
-        }).catch(err => {
-            console.log(err);
-        })
-    }
-
     handleChange1(event) {
         jsReleasePath = event.target.value
         this.setState({p1: jsReleasePath});
@@ -118,15 +96,6 @@ class JSCompress extends React.Component {
         versionFileName = event.target.value
         this.setState({p5: versionFileName});
     }
-    handleChange6(event) {
-        outCompressPath = event.target.value
-        this.setState({p6: outCompressPath});
-    }
-    handleChange7(event) {
-        compressFilePath = event.target.value
-        this.setState({p7: compressFilePath});
-    }
-
 
     checkParams(){
         console.log("jsReleasePath："+jsReleasePath);
@@ -166,35 +135,6 @@ class JSCompress extends React.Component {
         }
     }
 
-    onCompressTest(){
-        if(readData){
-            let uglifyJsFile = main.uglifyJsFile;
-            let res = uglifyJsFile(readData);
-            let fspath = outPublicPath + "\\123.txt";
-            fsUtil.writeFile(fspath, res);
-        }
-    }
-
-    selectCompressFile = () => {
-        let t = this;
-        const dialog = electron.remote.dialog;
-        dialog.showOpenDialog({
-            properties: ['openFile']
-        }).then(result => {
-            let paths = result.filePaths;
-            if (paths && paths.length > 0) {
-                compressFilePath = paths[0];
-                console.log(compressFilePath);
-                // t.setState({p7:compressFilePath});
-                fsUtil.readTextFile(compressFilePath, (data)=>{
-                    readData = data;
-                });
-            }
-        }).catch(err => {
-            console.log(err);
-        })
-    }
-
     render() {
         let t = this;
         return (
@@ -213,17 +153,9 @@ class JSCompress extends React.Component {
                     <input type="text" value={t.state.p4} onChange={t.handleChange4}></input><br></br>
                     <span>版本增量目录：</span>
                     <input type="text" value={t.state.p5} onChange={t.handleChange5}></input><br></br>
-                    <button onClick={t.onpublic}>发布项目</button><br></br>
                 </p>
                 <p>
-                    <span>选择压缩文件：</span>
-                    <input type="text" placeholder="选择文件" value={t.state.p7} onChange={t.handleChange7}></input>
-                    <button onClick={this.selectCompressFile}>浏览</button><br></br>
-                    <span>压缩输出文件：</span>
-                    <input type="text" placeholder="选择文件" value={t.state.p6} onChange={t.handleChange6}></input>
-                    <button onClick={this.electCompressOutFiles}>浏览</button><br></br>
-
-                    <button onClick={t.onCompressTest}>压缩测试</button>
+                    <button onClick={t.onpublic}>发布项目</button><br></br>
                 </p>
             </div>
         )

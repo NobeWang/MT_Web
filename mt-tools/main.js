@@ -25,9 +25,6 @@
   // 垃圾回收的时候，window对象将会自动的关闭
   let win;
 
-  console.log("__dirname=========================》》》：" + __dirname);
-  console.log("__filename=========================》》》：" + __filename);
-
   function createWindow() {
     const windowOptions = {
       width: 1300,

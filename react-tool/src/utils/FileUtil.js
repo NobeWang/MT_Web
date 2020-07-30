@@ -32,6 +32,50 @@ function mkdirsSync(dirname) {
     }
 }
 
+/**
+ * 读取文件数据
+ * 调用 fs.readFile() 方法来读取文件
+ * fs.readFile('读取文件的路径','文件编码格式','回调函数')
+ * 在读取文件的时候，如果传递了编码格式，那么回调函数中的 data默认就会转换为 字符串，否则data 参数的数据是一个 Buffer 对象，里面保存的就是一个一个的字节(理解为字节数组)
+ * 把 Buffer 对象转换为字符串，调用 toString() 方法
+ */
+function readTextFile(path, res) {
+    fs.readFile(path, 'utf-8', (err, data) => {
+        if (err) {
+            console.log(err);
+            res(null);
+        } else {
+            res(data);
+        }
+    })
+}
+
+/**
+ * 调用 fs.writeFile() 进行文件写入
+ * fs.writeFile() 是异步方法
+ * fs.writeFile('写入文件的路径','要写入的数据','文档编码格式','回调函数')
+ * 1. fs.writeFile('文件路径'，'要写入的内容'，['编码']，'回调函数');
+ * 2. 写入的时候如果没有这个文件，会自动创建这个文件
+ * 3. 如果被写入的文件已存在内容，那么写入的话，会覆盖之前的内容
+ * 4. 写入数据的类型必须是字符串或buffer二进制数据，对象等数据写入后，接收的是数据类型
+ * 5. 编码部分一般省略即可，或填写'utf-8'
+ * 6. 回调函数中，只有err一个参数，写入错误即可判断调用
+ * 7. fs.writeFileSync()同步版本
+ * @param {*} path 要写入的文件路径
+ * @param {*} data 要写入的数据，默认写入数据使用utf-8编码
+ */
+function writeFile(path, data) {
+    fs.writeFile(path, data, 'utf8', (err) => {
+        //如果 err===null,表示文件写入
+        //只要 err 里面不是null，就表示写入文件失败了！
+        if (err) {
+            console.log('写入文件出错拉！具体错误：' + err)
+        } else {
+            console.log('ok');
+        }
+    });
+}
+
 module.exports.modifyFilename = function modifyFilename(pth, modifier) {
     if (arguments.length !== 2) {
         throw new Error('`path` and `modifier` required');
@@ -55,6 +99,8 @@ module.exports.getExtName = getExtName;
 module.exports.getTypeExtName = getTypeExtName;
 module.exports.deleteFolder = deleteFolder;
 module.exports.readTextFile = readTextFile;
+module.exports.writeFile = writeFile;
+
 //调用
 //mkdirsSync("./aa/bb/cc" , null);
 //mkdirs("./aa/bb/cc", function (ee) {
@@ -134,25 +180,3 @@ function deleteFolder(path) {
         fs.rmdirSync(path);
     }
 };
-/**
- * 读取文件数据
- * @param {} path 
- */
-function readTextFile(path, res){
-    // 读取文件内容
-    if(!path){
-        console.error("file path error");
-        res(null);
-        return;
-    }
-    fs.readFile(path, 'utf-8', (err, data) => {
-        if (err) {
-            console.log(err);
-            res(null);
-            return;
-        } else {
-            res(data);
-            return;
-        }
-    })
-}
