@@ -194,7 +194,7 @@ class JsUglifyJS extends React.Component {
                     <input type="text" placeholder="选择文件【可选】" value={t.state.p4} onChange={t.handleChange4}></input>
                     <button onClick={this.selectCompressFile}>浏览</button><br></br>
                     <span>选择压缩文件：</span>
-                    <input type="text" placeholder="选择文件【必选】" value={t.state.p5} onChange={t.handleChange5}></input>
+                    <input type="text" placeholder="选择文件【可选】" value={t.state.p5} onChange={t.handleChange5}></input>
                     <button onClick={this.selectCompressFile}>浏览</button><br></br>
                     <span>压缩输出目录：</span>
                     <input type="text" placeholder="选择文件【必选】" value={t.state.outFilePath} onChange={t.handleChange6}></input>

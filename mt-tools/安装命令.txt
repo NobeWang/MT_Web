@@ -26,11 +26,9 @@ npm i -S react-router-dom
 或者npm install react-router-dom --save-dev //这里可以使用cnpm代替npm命令
 或者npm install --save react-router
 
-4.安装gulp模块
-cnpm install -g gulp gulp-concat gulp-uglify node-zip del images
-
-5.安装minimist模块
-npm i minimist -g
+4.UglifyJS 是一个js 解释器、最小化器、压缩器、美化器工具集（parser, minifier, compressor or beautifier toolkit）
+安装UglifyJS：
+npm install uglify-js -g
 
 
 运行：

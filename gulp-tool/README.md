@@ -7,6 +7,10 @@ npm install -g cnpm --registry=https://registry.npm.taobao.org
 4.cnpm i gulp-babel --save-dev//将es6转换成es5
 5.cnpm i gulp-gulp-concat --save-dev//合并两个js文件
 
+安装gulp模块一条命令搞定：
+cnpm install -g gulp gulp-concat gulp-uglify node-zip del images
+安装minimist模块
+npm i minimist -g
 
 gulp与node版本兼容问题
 win10系统下使用django时，用到了node,gulp等插件，但是在执行gulp命令时一直报错，网上找了n种方法，靠自己一步步填坑，终于解决了这个bug。记录一下完整的过程。
